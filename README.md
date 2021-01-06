@@ -91,6 +91,10 @@ Typing is provided by `pytest_gnupg_fixtures.GnuPGTrustStore`.
 
 ### 0.1.1 (2021-01-06)
 
+* Bug Fix: Correct package_data.
+
+### 0.1.1 (2021-01-06)
+
 * Initial release.
 
 ## Development
