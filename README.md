@@ -89,6 +89,10 @@ Typing is provided by `pytest_gnupg_fixtures.GnuPGTrustStore`.
 
 ## Changelog
 
+### 0.1.1 (2021-01-06)
+
+* Initial release.
+
 ## Development
 
 [Source Control](https://github.com/crashvb/pytest-gnupg-fixtures)
