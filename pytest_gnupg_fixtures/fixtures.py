@@ -50,7 +50,7 @@ def gnupg_keypair(
 ) -> GnuPGKeypair:
     """Provides a keypair within a temporary GnuPG trust store."""
 
-    LOGGER.debug("Initializing GPG keypar ...")
+    LOGGER.debug("Initializing GPG keypair ...")
     environment = {"HOME": "/dev/null"}
     result = subprocess.run(
         [
