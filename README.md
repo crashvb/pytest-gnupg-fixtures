@@ -17,12 +17,12 @@ setup(
 All fixtures should be automatically included via the <tt>pytest11</tt> entry point.
 ```python
 import pytest
-from pytest_gnupgfixtures import GnuPGKeypair  # Optional, for typing
+from pytest_gnupg_fixtures import GnuPGKeypair  # Optional, for typing
 
 def test_custom_signer(gnupg_keypair: GnuPGKeypair):
     custom_signer = CustomSigner(
         keyid=gnupg_keypair.fingerprints[1],
-        passphrase="testing",
+        passphrase=gnupg_keypair.passphrase,
         homedir=gnupg_keypair.gnupg_home,
     )
     assert "PGP SIGNATURE" in custom_signer.sign("my data")
@@ -49,9 +49,15 @@ $ python -m pip install --editable .[dev]
 
 ## Fixtures
 
+### <a name="gnupg_email"></a> gnupg_email
+
+Provides a generated email to use as pair of the uid for the keypair.
+
 ### <a name="gnupg_gen_key_conf"></a> gnupg_gen_key_conf
 
-Provides the path to a GnuPG script file that is used to generate a temporary keypair. If a user-defined script (<tt>tests/gnupg_gen_key.conf</tt>) can be located, it is used. Otherwise, an embedded script is copied to temporary location and returned. This fixture is used by the [gnupg_keypair](#gnupg_keypair) fixture.
+Provides the path to a templated GnuPG script file that is used to generate a temporary keypair. If a user-defined script (<tt>tests/gnupg_gen_key.conf</tt>) can be located, it is used. Otherwise, an embedded script template is copied to temporary location and returned. This fixture is used by the [gnupg_keypair](#gnupg_keypair) fixture.
+
+The`$GNUGP_EMAIL` and `$GNUPG_PASSPHRASE` variables will be populated within the template during generation of the keypair.
 
 ### <a name="gnupg_keypair"></a> gnupg_keypair
 
@@ -61,13 +67,20 @@ Provides a keypair within a temporary GnuPG trust store.
 
 The following fields are defined in the tuple provided by this fixture:
 
+* **email** - from [gnupg_email](#gnupg_email)
 * **fingerprints** - A list of key fingerprints. Typically pubkey, subkey...
-* **gen_key_conf** - from [gnupg_gen_key_conf](#gnupg_gen_key_conf)
 * **gnupg_home** - from [gnupg_trust_store](#gnupg_trust_store)
 * **keyid** - The public key id of the temporary keypair.
+* **gen_key_conf** - from [gnupg_gen_key_conf](#gnupg_gen_key_conf)
+* **passphrase** - from [gnupg_passphrase](#gnupg_passphrase)
+* **script** - The path to the instantiated script from [gnupg_gen_key_conf](#gnupg_gen_key_conf)
+* **uids** A list of uids existing within the trust store.
 
 Typing is provided by `pytest_gnupg_fixtures.GnuPGKeypair`.
 
+### <a name="gnupg_passphrase"></a> gnupg_passphrase
+
+Provides a generated passphrase to use for the keypair.
 
 ### <a name="gnupg_trust_store"></a> gnupg_trust_store
 
