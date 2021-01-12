@@ -102,7 +102,22 @@ Typing is provided by `pytest_gnupg_fixtures.GnuPGTrustStore`.
 
 ## Changelog
 
-### 0.1.1 (2021-01-06)
+### 0.1.3 (2021-01-12)
+
+* Add uid parsing to fixture.
+* Add gpg-wrapper.
+* Update travis configuration to show gpg information.
+* Update to dynamically generate passphrase.
+* Update to dynamically generate email.
+* Update readme.
+* Update makefile.
+* Remove deprecated pytest-runner integration.
+* Remove unused conftest.
+* Remove unneeded test dependency.
+* Remove comment from template.
+* Tweak gnupg trust store temporary path.
+
+### 0.1.2 (2021-01-06)
 
 * Bug Fix: Correct package_data.
 
