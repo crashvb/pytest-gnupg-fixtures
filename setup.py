@@ -29,7 +29,7 @@ setup(
     ],
     description="Pytest fixtures for testing with gnupg.",
     entry_points={"pytest11": ["gnupg_fixtures = pytest_gnupg_fixtures"]},
-    extras_require={"dev": ["black", "pylint", "twine", "wheel", "www_authenticate"]},
+    extras_require={"dev": ["black", "pylint", "twine", "wheel"]},
     include_package_data=True,
     install_requires=["pytest"],
     keywords="fixtures gnupg gpg pytest",
@@ -39,9 +39,7 @@ setup(
     name="pytest_gnupg_fixtures",
     packages=find_packages(),
     package_data={"pytest_gnupg_fixtures": ["gnupg-gen-key.conf"]},
-    setup_requires=["pytest-runner"],
     test_suite="tests",
-    tests_require=["www_authenticate"],
     url="https://pypi.org/project/pytest-gnupg-fixtures/",
     version=find_version("pytest_gnupg_fixtures", "__init__.py"),
 )
