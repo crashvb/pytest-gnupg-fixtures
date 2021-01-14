@@ -71,7 +71,10 @@ def gnupg_keypair(
     path_script = tmp_path.joinpath(__name__)
     template = Template(gnupg_gen_key_conf.read_text("utf-8"))
     path_script.write_text(
-        template.substitute({"GNUPG_EMAIL": gnupg_email, "GNUPG_PASSPHRASE": gnupg_passphrase}), "utf-8"
+        template.substitute(
+            {"GNUPG_EMAIL": gnupg_email, "GNUPG_PASSPHRASE": gnupg_passphrase}
+        ),
+        "utf-8",
     )
 
     environment = {"HOME": "/dev/null"}
@@ -150,19 +153,23 @@ def gnupg_trust_store(request, tmp_path_factory: TempPathFactory) -> GnuPGTrustS
 
     path = tmp_path.joinpath("gpg-agent.conf")
     with path.open("w") as file:
-        file.write("""
+        file.write(
+            """
             allow-loopback-pinentry
             max-cache-ttl 60
-        """)
+        """
+        )
     path.chmod(0o600)
 
     # https://betakuang.me/post/2020-05-08-git-gpg-command-line-passphrase.html
     path = tmp_path.joinpath("gpg-wrapper")
     with path.open("w") as file:
-        file.write("""
+        file.write(
+            """
             #!/bin/sh
             gpg --passphrase "${GNUPG_PASSPHRASE}" --pinentry-mode loopback $@
-        """)
+        """
+        )
     path.chmod(0o755)
 
     def _stop_gpg_agent():

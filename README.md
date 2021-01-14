@@ -9,6 +9,8 @@ Pytest fixtures to dynamically create [GnuPG](https://www.gnupg.org/) instances 
 Update <tt>setup.py</tt> to include:
 
 ```python
+from distutils.core import setup
+
 setup(
 	tests_require=["pytest-gnupg-fixtures"]
 )
@@ -16,7 +18,6 @@ setup(
 
 All fixtures should be automatically included via the <tt>pytest11</tt> entry point.
 ```python
-import pytest
 from pytest_gnupg_fixtures import GnuPGKeypair  # Optional, for typing
 
 def test_custom_signer(gnupg_keypair: GnuPGKeypair):
@@ -51,7 +52,7 @@ $ python -m pip install --editable .[dev]
 
 ### <a name="gnupg_email"></a> gnupg_email
 
-Provides a generated email to use as pair of the uid for the keypair.
+Provides a generated email to use as part of the uid for the keypair.
 
 ### <a name="gnupg_gen_key_conf"></a> gnupg_gen_key_conf
 
@@ -68,7 +69,7 @@ Provides a keypair within a temporary GnuPG trust store.
 The following fields are defined in the tuple provided by this fixture:
 
 * **email** - from [gnupg_email](#gnupg_email)
-* **fingerprints** - A list of key fingerprints. Typically pubkey, subkey...
+* **fingerprints** - A list of key fingerprints. Typically: pubkey, subkey...
 * **gnupg_home** - from [gnupg_trust_store](#gnupg_trust_store)
 * **keyid** - The public key id of the temporary keypair.
 * **gen_key_conf** - from [gnupg_gen_key_conf](#gnupg_gen_key_conf)
