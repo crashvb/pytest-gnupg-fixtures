@@ -168,7 +168,7 @@ def gnupg_trust_store(request, tmp_path_factory: TempPathFactory) -> GnuPGTrustS
             """
             #!/bin/sh
             gpg --passphrase "${GNUPG_PASSPHRASE}" --pinentry-mode loopback $@
-        """
+            """
         )
     path.chmod(0o755)
 
