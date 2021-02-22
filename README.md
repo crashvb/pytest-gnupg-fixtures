@@ -101,31 +101,6 @@ Typing is provided by `pytest_gnupg_fixtures.GnuPGTrustStore`.
 1. This has been coded to work with gpg2.
 2. The generated keypair is very simple. TBD if this will be expanded to support a more realistic configuration.
 
-## Changelog
-
-### 0.1.3 (2021-01-12)
-
-* Add uid parsing to fixture.
-* Add gpg-wrapper.
-* Update travis configuration to show gpg information.
-* Update to dynamically generate passphrase.
-* Update to dynamically generate email.
-* Update readme.
-* Update makefile.
-* Remove deprecated pytest-runner integration.
-* Remove unused conftest.
-* Remove unneeded test dependency.
-* Remove comment from template.
-* Tweak gnupg trust store temporary path.
-
-### 0.1.2 (2021-01-06)
-
-* Bug Fix: Correct package_data.
-
-### 0.1.1 (2021-01-06)
-
-* Initial release.
-
 ## Development
 
 [Source Control](https://github.com/crashvb/pytest-gnupg-fixtures)

@@ -151,6 +151,12 @@ def gnupg_trust_store(request, tmp_path_factory: TempPathFactory) -> GnuPGTrustS
     LOGGER.debug("Initializing GPG home: %s ...", tmp_path)
     tmp_path.chmod(0o0700)
 
+    # Note: dirmngr cannot be stopped unless this files exists!?!
+    path = tmp_path.joinpath("dirmngr_ldapservers.conf")
+    with path.open("w") as file:
+        file.write("# GnuPG sucks sometimes!")
+    path.chmod(0o600)
+
     path = tmp_path.joinpath("gpg-agent.conf")
     with path.open("w") as file:
         file.write(
@@ -172,6 +178,18 @@ def gnupg_trust_store(request, tmp_path_factory: TempPathFactory) -> GnuPGTrustS
         )
     path.chmod(0o755)
 
+    def _stop_dirmngr():
+        LOGGER.debug("Stopping dirmngr ...")
+        subprocess.run(
+            [
+                "/usr/bin/gpgconf",
+                "--kill",
+                "dirmngr",
+            ],
+            check=False,
+            env={"GNUPGHOME": str(tmp_path)}
+        )
+
     def _stop_gpg_agent():
         LOGGER.debug("Stopping gpg-agent ...")
         subprocess.run(
@@ -186,7 +204,8 @@ def gnupg_trust_store(request, tmp_path_factory: TempPathFactory) -> GnuPGTrustS
             check=False,
         )
 
+    request.addfinalizer(_stop_dirmngr)
     request.addfinalizer(_stop_gpg_agent)
 
     yield GnuPGTrustStore(gnupg_home=tmp_path)
-    shutil.rmtree(tmp_path, ignore_errors=True)
+    #shutil.rmtree(tmp_path, ignore_errors=True)
