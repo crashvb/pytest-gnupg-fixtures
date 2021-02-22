@@ -9,6 +9,8 @@ Pytest fixtures to dynamically create [GnuPG](https://www.gnupg.org/) instances 
 Update <tt>setup.py</tt> to include:
 
 ```python
+from distutils.core import setup
+
 setup(
 	tests_require=["pytest-gnupg-fixtures"]
 )
@@ -16,7 +18,6 @@ setup(
 
 All fixtures should be automatically included via the <tt>pytest11</tt> entry point.
 ```python
-import pytest
 from pytest_gnupg_fixtures import GnuPGKeypair  # Optional, for typing
 
 def test_custom_signer(gnupg_keypair: GnuPGKeypair):
@@ -51,7 +52,7 @@ $ python -m pip install --editable .[dev]
 
 ### <a name="gnupg_email"></a> gnupg_email
 
-Provides a generated email to use as pair of the uid for the keypair.
+Provides a generated email to use as part of the uid for the keypair.
 
 ### <a name="gnupg_gen_key_conf"></a> gnupg_gen_key_conf
 
@@ -68,7 +69,7 @@ Provides a keypair within a temporary GnuPG trust store.
 The following fields are defined in the tuple provided by this fixture:
 
 * **email** - from [gnupg_email](#gnupg_email)
-* **fingerprints** - A list of key fingerprints. Typically pubkey, subkey...
+* **fingerprints** - A list of key fingerprints. Typically: pubkey, subkey...
 * **gnupg_home** - from [gnupg_trust_store](#gnupg_trust_store)
 * **keyid** - The public key id of the temporary keypair.
 * **gen_key_conf** - from [gnupg_gen_key_conf](#gnupg_gen_key_conf)
@@ -99,31 +100,6 @@ Typing is provided by `pytest_gnupg_fixtures.GnuPGTrustStore`.
 
 1. This has been coded to work with gpg2.
 2. The generated keypair is very simple. TBD if this will be expanded to support a more realistic configuration.
-
-## Changelog
-
-### 0.1.3 (2021-01-12)
-
-* Add uid parsing to fixture.
-* Add gpg-wrapper.
-* Update travis configuration to show gpg information.
-* Update to dynamically generate passphrase.
-* Update to dynamically generate email.
-* Update readme.
-* Update makefile.
-* Remove deprecated pytest-runner integration.
-* Remove unused conftest.
-* Remove unneeded test dependency.
-* Remove comment from template.
-* Tweak gnupg trust store temporary path.
-
-### 0.1.2 (2021-01-06)
-
-* Bug Fix: Correct package_data.
-
-### 0.1.1 (2021-01-06)
-
-* Initial release.
 
 ## Development
 
