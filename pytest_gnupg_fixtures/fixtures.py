@@ -208,4 +208,4 @@ def gnupg_trust_store(request, tmp_path_factory: TempPathFactory) -> GnuPGTrustS
     request.addfinalizer(_stop_gpg_agent)
 
     yield GnuPGTrustStore(gnupg_home=tmp_path)
-    #shutil.rmtree(tmp_path, ignore_errors=True)
+    shutil.rmtree(tmp_path, ignore_errors=True)
