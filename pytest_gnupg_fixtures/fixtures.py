@@ -187,7 +187,7 @@ def gnupg_trust_store(request, tmp_path_factory: TempPathFactory) -> GnuPGTrustS
                 "dirmngr",
             ],
             check=False,
-            env={"GNUPGHOME": str(tmp_path)}
+            env={"GNUPGHOME": str(tmp_path)},
         )
 
     def _stop_gpg_agent():

@@ -40,6 +40,6 @@ setup(
     packages=find_packages(),
     package_data={"pytest_gnupg_fixtures": ["gnupg-gen-key.conf"]},
     test_suite="tests",
-    url="https://pypi.org/project/pytest-gnupg-fixtures/",
+    url="https://github.com/crashvb/pytest-gnupg-fixtures",
     version=find_version("pytest_gnupg_fixtures", "__init__.py"),
 )
