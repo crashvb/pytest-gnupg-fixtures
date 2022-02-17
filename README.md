@@ -95,7 +95,6 @@ The following fields are defined in the tuple provided by this fixture:
 
 Typing is provided by `pytest_gnupg_fixtures.GnuPGTrustStore`.
 
-
 ## <a name="limitations"></a>Limitations
 
 1. This has been coded to work with gpg2.
