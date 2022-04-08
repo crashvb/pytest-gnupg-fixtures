@@ -1,5 +1,13 @@
 # pytest-gnupg-fixtures
 
+[![pypi version](https://img.shields.io/pypi/v/pytest-gnupg-fixtures.svg)](https://pypi.org/project/pytest-gnupg-fixtures)
+[![build status](https://github.com/crashvb/pytest-gnupg-fixtures/actions/workflows/main.yml/badge.svg)](https://github.com/crashvb/pytest-gnupg-fixtures/actions)
+[![coverage status](https://coveralls.io/repos/github/crashvb/pytest-gnupg-fixtures/badge.svg)](https://coveralls.io/github/crashvb/pytest-gnupg-fixtures)
+[![python versions](https://img.shields.io/pypi/pyversions/pytest-gnupg-fixtures.svg?logo=python&logoColor=FBE072)](https://pypi.org/project/pytest-gnupg-fixtures)
+[![linting](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/PyCQA/pylint)
+[![code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![license](https://img.shields.io/github/license/crashvb/pytest-gnupg-fixtures.svg)](https://github.com/crashvb/pytest-gnupg-fixtures/blob/master/LICENSE)
+
 ## Overview
 
 Pytest fixtures to dynamically create [GnuPG](https://www.gnupg.org/) instances for testing.
@@ -28,8 +36,6 @@ def test_custom_signer(gnupg_keypair: GnuPGKeypair):
     )
     assert "PGP SIGNATURE" in custom_signer.sign("my data")
 ```
-
-* Tested with python 3.8
 
 ## Installation
 ### From [pypi.org](https://pypi.org/project/pytest-gnupg-fixtures/)
